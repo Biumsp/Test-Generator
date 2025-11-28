@@ -3,49 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Test Generator</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        button {
-            padding: 15px 30px;
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        button:hover { background-color: #0056b3; }
-        .loading { display: none; margin-top: 20px; color: #666; }
-    </style>
-</head>
+    <title>Python Test Generator | Qubyt</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
 <body>
 
-    <h1>Generate Python Test</h1>
-    <p>Click below to generate a unique random test.</p>
-    
-    <button onclick="downloadTest()">Download New Test</button>
-    <div id="status" class="loading">Generating... please wait...</div>
+    <div class="main-container">
+
+        <div class="school-credit">
+            <img src="images/qubyt_logo.png" alt="Qubyt logo">
+            <p>
+                Powered by <a href="https://www.qubyt.it" target="_blank">Qubyt</a>
+            </p>
+        </div>
+
+        <h1>Test Generator</h1>
+        <p class="subtitle">Create unique Python exercises in seconds.</p>
+
+        <div class="panel">
+            <p style="margin-bottom: 20px; color: #555;">
+                Click the button below to generate a new random test file based on the teacher's template.
+            </p>
+            
+            <button onclick="downloadTest()">Download New Test</button>
+            
+            <div id="status" class="loading-status hidden">
+                Generating... please wait...
+            </div>
+        </div>
+
+        <footer class="project-footer">
+            <p>Questo tool è stato realizzato per automatizzare la creazione di verifiche e supportare la didattica.</p>
+            <a href="https://www.qubyt.it" target="_blank" class="footer-link">Scopri i nostri corsi &rarr;</a>
+        </footer>
+
+    </div>
 
     <script>
-        // REPLACE THIS URL AFTER DEPLOYING FIREBASE FUNCTIONS
+        // REPLACE THIS WITH YOUR ACTUAL CLOUD FUNCTION URL
         const FUNCTION_URL = "https://us-central1-test-generator-qubyt.cloudfunctions.net/generate_test_file";
 
         async function downloadTest() {
             const status = document.getElementById('status');
-            status.style.display = 'block';
+            status.classList.remove('hidden'); // Use the class to show/hide
 
             try {
-                // Since we set Content-Disposition in Python, 
-                // navigating to the URL triggers the download directly.
+                // Trigger the download
                 window.location.href = FUNCTION_URL;
                 
-                // Hide loading text after a short delay
-                setTimeout(() => { status.style.display = 'none'; }, 2000);
+                // Hide loading text after a short delay so the user sees it happened
+                setTimeout(() => { 
+                    status.classList.add('hidden'); 
+                }, 3000);
             } catch (error) {
                 alert("Error generating test");
                 console.error(error);
-                status.style.display = 'none';
+                status.classList.add('hidden');
             }
         }
     </script>

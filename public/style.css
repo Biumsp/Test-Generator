@@ -1,0 +1,127 @@
+/* public/style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #fbedd0;
+    --panel-bg: #fefaf6;
+    --primary: #2c3e50;
+    --accent: #732c04;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--primary);
+}
+
+.main-container {
+    width: 100%;
+    max-width: 500px; /* Slightly wider for the text instructions */
+    text-align: center;
+    padding: 20px;
+}
+
+.hidden { display: none !important; }
+
+h1 { 
+    color: var(--primary); 
+    font-size: 2.2rem;
+    margin-bottom: 5px; 
+}
+
+p.subtitle { 
+    color: #7f8c8d; 
+    font-size: 1.2rem; 
+    margin-bottom: 25px; 
+}
+
+/* PANELS */
+.panel {
+    background: var(--panel-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+/* CONTROLS */
+button {
+    border: none; 
+    padding: 15px 20px; 
+    border-radius: 6px;
+    font-size: 1.1rem; 
+    cursor: pointer; 
+    transition: transform 0.1s, background-color 0.2s;
+    width: 100%; 
+    font-weight: bold;
+    background-color: var(--primary); 
+    color: white; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover { background-color: #1a252f; }
+button:active { transform: scale(0.98); }
+
+/* BRANDING HEADER */
+.school-credit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 5px;
+}
+
+.school-credit img {
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+}
+
+.school-credit p {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.school-credit a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+}
+.school-credit a:hover { text-decoration: underline; }
+
+/* FOOTER */
+.project-footer {
+    margin-top: 30px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 20px;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.footer-link {
+    display: inline-block;
+    margin-top: 5px;
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* LOADING STATUS */
+.loading-status {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #7f8c8d;
+    font-style: italic;
+}
