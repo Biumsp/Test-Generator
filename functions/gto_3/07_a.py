@@ -1,0 +1,6 @@
+print("abc" and None)
+print("Yes" or "No")
+print("True" or True)
+print({2: "ok"} and [False])
+print(not "ok" and "ok")
+print(not 22 and x)

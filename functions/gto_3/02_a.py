@@ -1,0 +1,6 @@
+print(0 and 6)
+print(3 or False)
+print(None or 5)
+print([None] and [None, False])
+print(not 3 and None)
+print(not 2 and "abc")

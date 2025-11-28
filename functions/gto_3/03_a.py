@@ -1,0 +1,6 @@
+print(5 and 3)
+print(True or False)
+print(None or False)
+print([True] and [False])
+print(not True and None)
+print(not 2 and "abc")

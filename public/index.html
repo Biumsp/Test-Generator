@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Test Generator</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        .loading { display: none; margin-top: 20px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <h1>Generate Python Test</h1>
+    <p>Click below to generate a unique random test.</p>
+    
+    <button onclick="downloadTest()">Download New Test</button>
+    <div id="status" class="loading">Generating... please wait...</div>
+
+    <script>
+        // REPLACE THIS URL AFTER DEPLOYING FIREBASE FUNCTIONS
+        const FUNCTION_URL = "https://us-central1-test-generator-qubyt.cloudfunctions.net/generate_test_file";
+
+        async function downloadTest() {
+            const status = document.getElementById('status');
+            status.style.display = 'block';
+
+            try {
+                // Since we set Content-Disposition in Python, 
+                // navigating to the URL triggers the download directly.
+                window.location.href = FUNCTION_URL;
+                
+                // Hide loading text after a short delay
+                setTimeout(() => { status.style.display = 'none'; }, 2000);
+            } catch (error) {
+                alert("Error generating test");
+                console.error(error);
+                status.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

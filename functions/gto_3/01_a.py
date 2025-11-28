@@ -1,0 +1,6 @@
+print(3 and 5)
+print(3 or 5)
+print(0 or 5)
+print([] and [2, 3])
+print(not 3 and 5)
+print(not 2 and "")

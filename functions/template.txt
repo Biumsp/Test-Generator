@@ -1,0 +1,29 @@
+# Nome e Cognome:
+# Classe:
+# Data:
+
+
+# Guess the output: scrivi cosa sarebbe mostrato a schermo (printato) se eseguissimo questo codice.
+# Per ogni blocco di codice, i possibili risultati sono:
+# 1. Qualcosa viene mandato a schermo: in questo caso scrivere cosa.
+# 2. Il codice dà errore prima di mandare a schermo qualsiasi cosa.
+#    In questo caso scrivere cosa causa l'errore e indicare 
+#    la riga (riportandone il contenuto)
+# 3. Il codice entra in un loop infinito: spiegare perché.
+# 4. Una combinazione delle precedenti (es. printa "ok" e poi dà errore).
+
+# Considerate ogni blocco come indipendente dagli altri
+# Quindi qualsiasi variabile creata o modificata in un esercizio,
+# non esiste nei successivi.
+
+
+>> 5 x gto_1
+>> 5 x gto_3
+>> 6 x gto_5
+>> 2 x gto_8
+
+>> AFTER
+# Scrivi qui sotto la tua risposta:
+# Output: 
+
+>> ENDAFTER
