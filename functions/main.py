@@ -84,7 +84,8 @@ def execute_snippet(code_content):
             
         return output.strip()
 
-    except subprocess.TimeoutError:
+    # --- THE FIX IS HERE (TimeoutExpired instead of TimeoutError) ---
+    except subprocess.TimeoutExpired:
         return "--- INFINITE LOOP DETECTED (Timed out after 2s) ---"
     except Exception as e:
         return f"--- SYSTEM ERROR ---\n{str(e)}"
@@ -201,7 +202,8 @@ def generate_test_file(req: https_fn.Request) -> https_fn.Response:
         response=final_content,
         headers={
             "Content-Type": "text/plain",
-            "Content-Disposition": f'attachment; filename="{filename}"'
+            "Content-Disposition": f'attachment; filename="{filename}"',
+            "Access-Control-Expose-Headers": "Content-Disposition"  # <--- NEW LINE
         }
     )
 
