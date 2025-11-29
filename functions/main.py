@@ -11,7 +11,17 @@ from firebase_admin import initialize_app, firestore
 
 # Initialize Firebase App and Firestore
 initialize_app()
-db = firestore.client()
+
+_db_client = None
+
+def get_db():
+    """
+    Returns the Firestore client, initializing it only if necessary.
+    """
+    global _db_client
+    if _db_client is None:
+        _db_client = firestore.client()
+    return _db_client
 
 # --- Configuration ---
 # (We no longer need the Animal lists since we use the Student Name)
@@ -173,7 +183,7 @@ def generate_test_file(req: https_fn.Request) -> https_fn.Response:
             exercise_counter += 1
 
     # 4. Save to Firestore
-    doc_ref = db.collection("generated_tests").document(test_id)
+    doc_ref = get_db().collection("generated_tests").document(test_id)
     doc_ref.set({
         "id": test_id,
         "fullname": fullname,
@@ -208,7 +218,7 @@ def generate_solution_file(req: https_fn.Request) -> https_fn.Response:
         return https_fn.Response("Error: Missing 'id' parameter.", status=400)
 
     # 2. Fetch Log from Firestore
-    doc_ref = db.collection("generated_tests").document(test_id)
+    doc_ref = get_db().collection("generated_tests").document(test_id)
     doc = doc_ref.get()
 
     if not doc.exists:
