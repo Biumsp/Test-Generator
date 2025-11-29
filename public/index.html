@@ -5,31 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Test Generator | Qubyt</title>
     <link rel="stylesheet" href="style.css">
-    </head>
+</head>
 <body>
 
     <div class="main-container">
 
         <div class="school-credit">
             <img src="images/qubyt_logo.png" alt="Qubyt logo">
-            <p>
-                Powered by <a href="https://www.qubyt.it" target="_blank">Qubyt</a>
-            </p>
+            <p>Powered by <a href="https://www.qubyt.it" target="_blank">Qubyt</a></p>
         </div>
 
         <h1>Test Generator</h1>
         <p class="subtitle">Create unique Python exercises in seconds.</p>
 
         <div class="panel">
-            <p style="margin-bottom: 20px; color: #555;">
-                Click the button below to generate a new random test file based on the teacher's template.
+            <p style="margin-bottom: 10px; color: #555;">
+                Enter your full name to generate your unique test.
             </p>
+
+            <input type="text" id="fullname" placeholder="Name and Surname" 
+                   style="width: 100%; padding: 12px; margin-bottom: 20px; border: 2px solid #ddd; border-radius: 6px; font-size: 1rem;">
             
             <button onclick="downloadTest()">Download New Test</button>
             
             <div id="status" class="loading-status hidden">
                 Generating... please wait...
             </div>
+            <div id="error-msg" class="loading-status hidden" style="color: red;"></div>
         </div>
 
         <footer class="project-footer">
@@ -40,25 +42,61 @@
     </div>
 
     <script>
-        // REPLACE THIS WITH YOUR ACTUAL CLOUD FUNCTION URL
+        // REPLACE WITH YOUR NEW FUNCTION URL
         const FUNCTION_URL = "https://us-central1-test-generator-qubyt.cloudfunctions.net/generate_test_file";
 
         async function downloadTest() {
+            const nameInput = document.getElementById('fullname');
             const status = document.getElementById('status');
-            status.classList.remove('hidden'); // Use the class to show/hide
+            const errorMsg = document.getElementById('error-msg');
+            
+            // Basic Validation
+            if (!nameInput.value.trim()) {
+                alert("Please enter your name.");
+                return;
+            }
+
+            status.classList.remove('hidden');
+            errorMsg.classList.add('hidden');
 
             try {
-                // Trigger the download
-                window.location.href = FUNCTION_URL;
+                // We use fetch POST to send the name
+                const response = await fetch(FUNCTION_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullname: nameInput.value.trim() })
+                });
+
+                if (!response.ok) throw new Error("Server Error");
+
+                // Convert response to blob to trigger download
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
                 
-                // Hide loading text after a short delay so the user sees it happened
-                setTimeout(() => { 
-                    status.classList.add('hidden'); 
-                }, 3000);
+                // Create invisible link to download
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                // Get filename from header if possible, or default
+                const contentDisp = response.headers.get('Content-Disposition');
+                let fileName = 'test.py';
+                if (contentDisp && contentDisp.indexOf('filename=') !== -1) {
+                    fileName = contentDisp.split('filename=')[1].replace(/"/g, '');
+                }
+                a.download = fileName;
+                
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                
+                status.textContent = "Done! Good luck.";
+                setTimeout(() => { status.classList.add('hidden'); status.textContent = "Generating... please wait..."; }, 3000);
+
             } catch (error) {
-                alert("Error generating test");
                 console.error(error);
                 status.classList.add('hidden');
+                errorMsg.textContent = "Error generating test. Please try again.";
+                errorMsg.classList.remove('hidden');
             }
         }
     </script>
