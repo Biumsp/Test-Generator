@@ -19,8 +19,9 @@
 
 >> 5 x gto_1
 >> 5 x gto_3
->> 6 x gto_5
->> 2 x gto_8
+>> 4 x gto_5
+>> 2 x gto_6
+>> 1 x gto_8
 
 >> AFTER
 # Scrivi qui sotto la tua risposta:
