@@ -12,6 +12,9 @@
 # 3. Il codice entra in un loop infinito: spiegare perché.
 # 4. Una combinazione delle precedenti (es. printa "ok" e poi dà errore).
 
+# NOTA: Se un output risulta in una sequenza (ad esempio, 1, 2, 3, 4, 5, 6, 7, 8... 100)
+# invece che scriverli tutti, potete descrivere la sequenza (es. "tutti i numeri interi da 1 a 100")
+
 # Considerate ogni blocco come indipendente dagli altri
 # Quindi qualsiasi variabile creata o modificata in un esercizio,
 # non esiste nei successivi.
