@@ -196,7 +196,7 @@ def generate_test_file(req: https_fn.Request) -> https_fn.Response:
     final_content = output_buffer.getvalue()
     output_buffer.close()
     
-    filename = f"test_{fullname}.py"
+    filename = f"test_{fullname}.txt"
 
     return https_fn.Response(
         response=final_content,
