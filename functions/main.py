@@ -236,7 +236,7 @@ def generate_solution_file(req: https_fn.Request) -> https_fn.Response:
     output_buffer = io.StringIO()
 
     output_buffer.write(f"# ID {test_id}\n")
-    output_buffer.write(f"Test Timestamp: {timestamp}")
+    output_buffer.write(f"Test Timestamp: {timestamp}\n")
     output_buffer.write(f"# SOLUTION KEY FOR: {fullname}\n")
     output_buffer.write(f"# Solution Generated: {datetime.datetime.now()}\n")
     output_buffer.write("# " + "="*40 + "\n\n")
