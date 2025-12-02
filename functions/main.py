@@ -228,6 +228,7 @@ def generate_solution_file(req: https_fn.Request) -> https_fn.Response:
     
     data = doc.to_dict()
     fullname = data.get('fullname', 'Unknown')
+    timestamp = data.get('timestamp', 'Unknown')
     exercises_list = data.get('exercises', [])
 
     # 3. Generate Solution Content
@@ -235,8 +236,9 @@ def generate_solution_file(req: https_fn.Request) -> https_fn.Response:
     output_buffer = io.StringIO()
 
     output_buffer.write(f"# ID {test_id}\n")
+    output_buffer.write(f"Test Timestamp: {timestamp}")
     output_buffer.write(f"# SOLUTION KEY FOR: {fullname}\n")
-    output_buffer.write(f"# Generated: {datetime.datetime.now()}\n")
+    output_buffer.write(f"# Solution Generated: {datetime.datetime.now()}\n")
     output_buffer.write("# " + "="*40 + "\n\n")
 
     for idx, rel_path in enumerate(exercises_list):
